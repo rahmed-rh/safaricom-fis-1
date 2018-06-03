@@ -9,24 +9,15 @@ openshift.withCluster() {
    echo "Hello from project ${openshift.project()} in cluster ${openshift.cluster()}"
 
    // Mark the code checkout 'stage'....
-   stage('Read CM') {
-
-    def cmSelector = openshift.selector("configmap", "pipeline-app-config")
-    def cmExists = cmSelector.exists()
-
-    if (cmExists) {
-     cm = cmSelector.object()
-    } else {
-     error("Build failed Application ConfigMap is not found, try to run infra pipeline first.")
+   stage('Creat MySql') {
+   def mysqlSvcSelector = openshift.selector("service", "mysql-57-rhel7")
+   defm mysqlSvcExists = mysqlSvcSelector.exists()
+    if (!mysqlSvcExists) {
+	   def app = openshift.newApp('registry.access.redhat.com/rhscl/mysql-57-rhel7','-e MYSQL_USER=user','-e MYSQL_PASSWORD=password','-e MYSQL_DATABASE=sampledb')
     }
-    echo "The CM is ${cm}"
-    echo "The fis-1-app-git-url is ${cm.data['fis-1-app-git-url']}"
-    echo "The fis-1-app-name is ${cm.data['fis-1-app-name']}"
-    echo "The fis-2-app-git-url is ${cm.data['fis-2-app-git-url']}"
-    echo "The fis-2-app-name is ${cm.data['fis-2-app-name']}"
+	
 
    }
-
    node('maven') {
     // Mark the code checkout 'stage'....
     stage('Checkout') {

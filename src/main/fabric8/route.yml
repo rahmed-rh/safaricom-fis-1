@@ -3,7 +3,7 @@ kind: Route
 metadata:
   name: fis-rest-1
   labels:
-    app: uaex-fis-1
+    app: safaricom-fis-1
 spec:
   to:
     kind: Service

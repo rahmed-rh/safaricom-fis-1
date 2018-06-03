@@ -3,12 +3,12 @@ kind: Service
 metadata:
   name: fis-rest-1
   labels:
-    app: uaex-fis-1
+    app: safaricom-fis-1
 spec:
   ports:
     - protocol: TCP
       port: 80
       targetPort: 8080
   selector:
-    app: uaex-fis-1
+    app: safaricom-fis-1
   type: ClusterIP

@@ -11,7 +11,7 @@ spec:
   source:
     git:
       ref: master
-      uri: https://github.com/rahmed-rh/uaex-fis-1.git
+      uri: https://github.com/rahmed-rh/safaricom-fis-1.git
     type: Git
   strategy:
     jenkinsPipelineStrategy:

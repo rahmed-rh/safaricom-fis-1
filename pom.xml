@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
@@ -9,8 +8,8 @@
 	<artifactId>fis-rest-1</artifactId>
 	<version>1.0</version>
 
-	<name>Fuse Integration Services - UAEX Sample 1</name>
-	<description>UAEX Sample for Fuse Integration Services</description>
+	<name>Fuse Integration Services - Safaricom Sample 1</name>
+	<description>Safaricom Sample for Fuse Integration Services</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,20 +18,18 @@
 		<!-- <run.profiles>dev</run.profiles> -->
 
 		<!-- configure the versions you want to use here -->
-		<fabric8.version>2.2.170.redhat-000023</fabric8.version>
-		<spring-boot.version>1.5.0.RELEASE</spring-boot.version>
-		<infinispan.version>8.2.4.Final</infinispan.version>
+		<fabric8.version>2.2.170.redhat-000010</fabric8.version>
+		<spring-boot.version>1.4.1.RELEASE</spring-boot.version>
 
-		<!-- maven plugin versions -->
-		<fabric8.maven.plugin.version>3.1.80.redhat-000023</fabric8.maven.plugin.version>
-		<maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
-		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+		<!-- Maven plugin versions -->
+		<fabric8.maven.plugin.version>3.1.80.redhat-000010</fabric8.maven.plugin.version>
+		<maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
+		<maven-surefire-plugin.version>2.18.1</maven-surefire-plugin.version>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
-			<!-- import Fabric8 platform BOM first : Note we are not using spring 
-				boot starter parent -->
+			<!-- import Fabric8 platform BOM first : Note we are not using spring boot starter parent-->
 			<dependency>
 				<groupId>io.fabric8</groupId>
 				<artifactId>fabric8-project-bom-camel-spring-boot</artifactId>
@@ -57,10 +54,14 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-servlet-starter</artifactId>
 		</dependency>
-		<!-- Needed as the default embedded in spring-boot-starter-web is tomcat -->
+		<!-- Needed as the default embedded in spring-boot-starter-web is tomcat  -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-undertow</artifactId>
@@ -75,31 +76,21 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-script</artifactId>
+			<artifactId>camel-sql-starter</artifactId>
 		</dependency>
-
-		<!-- infinispan & JDG -->
 		<dependency>
 			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-infinispan-starter</artifactId>
+			<artifactId>camel-script</artifactId>
 		</dependency>
-
-
-		<!-- <dependency> <groupId>org.infinispan</groupId> <artifactId>infinispan-core</artifactId> 
-			<version>${infinispan.version}</version> </dependency> <dependency> <groupId>org.infinispan</groupId> 
-			<artifactId>infinispan-query-dsl</artifactId> <version>${infinispan.version}</version> 
-			</dependency> -->
 		<dependency>
-			<groupId>org.infinispan</groupId>
-			<artifactId>infinispan-remote</artifactId>
-			<version>${infinispan.version}</version>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
 		</dependency>
-
-		<!-- For JDG auto-configuration -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-configuration-processor</artifactId>
-			<optional>true</optional>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 
 		<!-- testing -->
@@ -135,9 +126,16 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-		<!-- <repository> <id>jboss-earlyaccess-repository</id> <url>http://maven.repository.redhat.com/earlyaccess/all/</url> 
-			<releases> <enabled>true</enabled> </releases> <snapshots> <enabled>false</enabled> 
-			</snapshots> </repository> -->
+		<repository>
+			<id>jboss-earlyaccess-repository</id>
+			<url>http://maven.repository.redhat.com/earlyaccess/all/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
 	</repositories>
 
 	<pluginRepositories>
@@ -151,9 +149,16 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</pluginRepository>
-		<!-- <pluginRepository> <id>jboss-earlyaccess-repository-plugin</id> <url>http://maven.repository.redhat.com/earlyaccess/all</url> 
-			<releases> <enabled>true</enabled> </releases> <snapshots> <enabled>false</enabled> 
-			</snapshots> </pluginRepository> -->
+		<pluginRepository>
+			<id>jboss-earlyaccess-repository-plugin</id>
+			<url>http://maven.repository.redhat.com/earlyaccess/all/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
 	</pluginRepositories>
 	<build>
 		<defaultGoal>spring-boot:run</defaultGoal>

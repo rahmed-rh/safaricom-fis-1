@@ -1,0 +1,5 @@
+oc new-app --name=mysql \
+    -e MYSQL_USER=user \
+    -e MYSQL_PASSWORD=password \
+    -e MYSQL_DATABASE=sampledb \
+    registry.access.redhat.com/rhscl/mysql-57-rhel7

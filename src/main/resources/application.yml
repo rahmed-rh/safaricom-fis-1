@@ -1,0 +1,35 @@
+camel:
+  springboot:
+    # The Camel context name
+    name: FisRestSQL
+
+# Binding health checks to a different port
+management:
+  port: 8081
+  
+server:
+  port: 8080
+
+# disable all management enpoints except health
+endpoints:
+  enabled: false
+  health:
+    enabled: true
+
+infinispan:
+  host: ${JDG_SERVICE_NAME}
+  port: ${JDG_SERVICE_PORT}
+  cache-name: ${JDG_CACHE_NAME}
+  username: ${JDG_SERVICE_USERNAME}
+  password: ${JDG_SERVICE_PASSWORD}
+
+# The application configuration properties
+quickstart:
+  generateOrderPeriod: 10s
+  processOrderPeriod: 30s
+
+apiContext: /api
+
+apidoc:
+  host: 0.0.0.0
+  port: ${server.port}

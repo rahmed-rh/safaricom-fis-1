@@ -1,0 +1,32 @@
+metadata:
+  labels:
+    app: uaex-fis-1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: uaex-fis-1
+    spec:
+      containers:
+        - 
+          resources:
+            requests:
+              cpu: 
+              memory: 
+            limits:
+              cpu: 
+              memory: 512Mi
+          env:
+          - name: JDG_SERVICE_NAME
+            value: uaex-jdg-data-hotrod
+          - name: JDG_SERVICE_PORT
+            value: 11333
+          - name: JDG_CACHE_NAME
+            value: payees
+          - name: JDG_SERVICE_USERNAME
+            value: admin
+          - name: JDG_SERVICE_PASSWORD
+            value: redhat1!
+          - name: JAVA_DIAGNOSTICS
+            value: true

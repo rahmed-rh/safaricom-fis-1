@@ -35,7 +35,7 @@ openshift.withCluster() {
 	    //openshift.selector( 'all', [ application: cm.data['fis-1-app-name'] ] ).delete()
 	    //openshift.selector( 'pvc', [ application: cm.data['fis-1-app-name'] ] ).delete()
      	// Run the fabric8
-     	sh "mvn fabric8:deploy -s settings.xml"
+     	sh "mvn fabric8:deploy"
     }
 
    }

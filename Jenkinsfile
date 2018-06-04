@@ -1,11 +1,5 @@
 openshift.withCluster() {
- openshift.withCredentials('cluster-admin-credential-id') {
-  def PROJECT_NAME = "poc"
-  def cm
-
-
-  openshift.withProject(PROJECT_NAME) {
-
+ 
    echo "Hello from project ${openshift.project()} in cluster ${openshift.cluster()}"
 
    // Mark the code checkout 'stage'....
@@ -23,7 +17,7 @@ openshift.withCluster() {
     stage('Checkout') {
 
       // Get some code from a GitHub repository
-      git branch: "master", url: cm.data['fis-1-app-git-url']
+      git branch: "master", url: "https://github.com/rahmed-rh/safaricom-fis-1.git"
      }
      	// Mark the code build 'stage'....
     stage('Maven Build') {
@@ -38,9 +32,5 @@ openshift.withCluster() {
      	sh "mvn fabric8:deploy"
     }
 
-   }
-
   }
-
- }
 }

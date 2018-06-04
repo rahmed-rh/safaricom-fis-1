@@ -5,12 +5,10 @@ openshift.withCluster() {
    // Mark the code checkout 'stage'....
    stage('Creat MySql') {
    def mysqlSvcSelector = openshift.selector("service", "mysql-57-rhel7")
-   defm mysqlSvcExists = mysqlSvcSelector.exists()
+   def mysqlSvcExists = mysqlSvcSelector.exists()
     if (!mysqlSvcExists) {
 	   def app = openshift.newApp('registry.access.redhat.com/rhscl/mysql-57-rhel7','-e MYSQL_USER=user','-e MYSQL_PASSWORD=password','-e MYSQL_DATABASE=sampledb')
     }
-	
-
    }
    node('maven') {
     // Mark the code checkout 'stage'....

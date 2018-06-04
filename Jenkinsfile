@@ -20,7 +20,7 @@ openshift.withCluster() {
      	// Mark the code build 'stage'....
     stage('Maven Build') {
 	     // Run the maven build
-	     sh "mvn clean compile -s settings.xml"
+	     sh "mvn clean compile"
     }
     stage('Deploy to DEV') {
 	    //echo "Deleting OLD JDG Env if exist"
